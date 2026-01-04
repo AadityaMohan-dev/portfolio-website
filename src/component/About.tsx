@@ -8,15 +8,6 @@ const container = {
   },
 };
 
-// const item = {
-//   hidden: { opacity: 0, y: 14 },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.4, ease: "easeOut" },
-//   },
-// };
-
 function About() {
   return (
     <motion.section
@@ -25,30 +16,27 @@ function About() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
-      className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8"
+      className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
     >
       {/* Heading */}
-      <motion.h1
-       
-        className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl"
-      >
+      <motion.h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
         About Me
       </motion.h1>
 
       {/* Intro */}
       <motion.div className="mt-6 space-y-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-lg font-semibold text-zinc-900 sm:text-xl lg:text-2xl">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-zinc-900">
             Hi, I’m Aaditya Mohan.
           </h2>
 
-          <div className="flex items-center gap-2 text-sm font-medium text-zinc-600 sm:text-base">
+          <div className="flex items-center gap-2 text-sm sm:text-base text-zinc-600">
             <span>📍</span>
             <span>Greater Noida, India</span>
           </div>
         </div>
 
-        <p className="max-w-4xl text-sm leading-relaxed text-zinc-700 sm:text-base lg:text-lg">
+        <p className="max-w-4xl text-sm sm:text-base lg:text-lg leading-relaxed text-zinc-700">
           A results-driven{" "}
           <span className="font-semibold text-zinc-900">
             Java Full Stack Developer
@@ -64,17 +52,13 @@ function About() {
           <span className="font-semibold">microservices architecture</span>, and{" "}
           <span className="font-semibold">MySQL</span>. I also have hands-on
           experience with{" "}
-          <span className="font-semibold">AWS cloud migration</span>,
-          performance tuning, and database optimization—focused on clean,
-          maintainable, production-ready code.
+          <span className="font-semibold">AWS cloud migration</span>, performance
+          tuning, and database optimization.
         </p>
       </motion.div>
 
       {/* Highlights */}
-      <motion.div
-        
-        className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2"
-      >
+      <motion.div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {[
           {
             title: "Backend & Architecture",
@@ -99,9 +83,9 @@ function About() {
         ].map((card, i) => (
           <div
             key={i}
-            className="rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-md"
+            className="rounded-xl border bg-white p-4 sm:p-5 transition"
           >
-            <h3 className="mb-2 text-sm font-semibold text-zinc-900 sm:text-base">
+            <h3 className="mb-2 text-sm sm:text-base font-semibold text-zinc-900">
               {card.title}
             </h3>
             <p className="text-sm leading-relaxed text-zinc-600">
@@ -112,17 +96,11 @@ function About() {
       </motion.div>
 
       {/* Education */}
-      <motion.h2
-        
-        className="mt-12 text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl"
-      >
+      <motion.h2 className="mt-14 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">
         Education
       </motion.h2>
 
-      <motion.p
-        
-        className="mt-4 text-sm text-zinc-700 sm:text-base"
-      >
+      <motion.p className="mt-4 text-sm sm:text-base text-zinc-700">
         <span className="font-semibold">
           Bachelor of Technology (B.Tech) – Computer Science
         </span>
@@ -131,10 +109,7 @@ function About() {
       </motion.p>
 
       {/* Quote */}
-      <motion.p
-       
-        className="mt-12 max-w-3xl text-sm italic text-zinc-600"
-      >
+      <motion.p className="mt-12 max-w-3xl text-sm italic text-zinc-600">
         “Passionate about leveraging technology to solve real-world problems and
         continuously learning to stay ahead in the evolving tech landscape.”
       </motion.p>
