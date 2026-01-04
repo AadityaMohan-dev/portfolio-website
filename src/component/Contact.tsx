@@ -1,4 +1,3 @@
-import React from "react";
 import { FiMail, FiPhoneCall } from "react-icons/fi";
 import hello from "../assets/hello.gif";
 import profile from "../assets/Profile.png";

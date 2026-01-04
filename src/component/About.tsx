@@ -8,14 +8,14 @@ const container = {
   },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 14 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
-  },
-};
+// const item = {
+//   hidden: { opacity: 0, y: 14 },
+//   visible: {
+//     opacity: 1,
+//     y: 0,
+//     transition: { duration: 0.4, ease: "easeOut" },
+//   },
+// };
 
 function About() {
   return (
@@ -29,14 +29,14 @@ function About() {
     >
       {/* Heading */}
       <motion.h1
-        variants={item}
+       
         className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl"
       >
         About Me
       </motion.h1>
 
       {/* Intro */}
-      <motion.div variants={item} className="mt-6 space-y-6">
+      <motion.div className="mt-6 space-y-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-lg font-semibold text-zinc-900 sm:text-xl lg:text-2xl">
             Hi, I’m Aaditya Mohan.
@@ -72,7 +72,7 @@ function About() {
 
       {/* Highlights */}
       <motion.div
-        variants={item}
+        
         className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2"
       >
         {[
@@ -113,14 +113,14 @@ function About() {
 
       {/* Education */}
       <motion.h2
-        variants={item}
+        
         className="mt-12 text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl"
       >
         Education
       </motion.h2>
 
       <motion.p
-        variants={item}
+        
         className="mt-4 text-sm text-zinc-700 sm:text-base"
       >
         <span className="font-semibold">
@@ -132,7 +132,7 @@ function About() {
 
       {/* Quote */}
       <motion.p
-        variants={item}
+       
         className="mt-12 max-w-3xl text-sm italic text-zinc-600"
       >
         “Passionate about leveraging technology to solve real-world problems and
