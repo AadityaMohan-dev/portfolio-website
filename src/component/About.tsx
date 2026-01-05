@@ -19,7 +19,7 @@ function About() {
       className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
     >
       {/* Heading */}
-      <motion.h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+      <motion.h1 className="text-2xl sm:text-3xl text-zinc-900 lg:text-4xl font-bold tracking-tight">
         About Me
       </motion.h1>
 
