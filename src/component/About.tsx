@@ -24,7 +24,7 @@ function About() {
       </motion.h1>
 
       {/* Intro */}
-      <motion.div className="mt-6 space-y-6">
+      <motion.div className="mt-6 space-y-2">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-zinc-900">
             Hi, I’m Aaditya Mohan.
@@ -36,7 +36,7 @@ function About() {
           </div>
         </div>
 
-        <p className="max-w-4xl text-sm sm:text-base lg:text-lg leading-relaxed text-zinc-700">
+        <p className="max-w-5xl text-sm sm:text-base lg:text-lg leading-relaxed text-zinc-700">
           A results-driven{" "}
           <span className="font-semibold text-zinc-900">
             Java Full Stack Developer
@@ -58,7 +58,7 @@ function About() {
       </motion.div>
 
       {/* Highlights */}
-      <motion.div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <motion.div className="mt-10 grid grid-cols-1   gap-4 sm:grid-cols-2">
         {[
           {
             title: "Backend & Architecture",
@@ -83,7 +83,7 @@ function About() {
         ].map((card, i) => (
           <div
             key={i}
-            className="rounded-xl border bg-white p-4 sm:p-5 transition"
+            className="rounded-xl  bg-zinc-100 p-4 sm:p-5 transition"
           >
             <h3 className="mb-2 text-sm sm:text-base font-semibold text-zinc-900">
               {card.title}
@@ -96,7 +96,7 @@ function About() {
       </motion.div>
 
       {/* Education */}
-      <motion.h2 className="mt-14 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">
+      <motion.h2 className="mt-10 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">
         Education
       </motion.h2>
 
@@ -109,7 +109,7 @@ function About() {
       </motion.p>
 
       {/* Quote */}
-      <motion.p className="mt-12 max-w-3xl text-sm italic text-zinc-600">
+      <motion.p className="mt-5 max-w-3xl text-sm italic text-zinc-600">
         “Passionate about leveraging technology to solve real-world problems and
         continuously learning to stay ahead in the evolving tech landscape.”
       </motion.p>

@@ -18,7 +18,7 @@ function Contact() {
         Contact
       </h1>
 
-      <p className="pb-8 max-w-3xl text-sm sm:text-base lg:text-lg italic text-zinc-500">
+      <p className="pb-8 max-w-6xl text-sm sm:text-base lg:text-2xl italic text-zinc-500">
         Open to full-time opportunities, freelance projects, and collaborations.
         Let’s connect and build something impactful.
       </p>

@@ -68,9 +68,9 @@ const Navbar: React.FC = () => {
                   flex items-center justify-center
                   h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 xl:h-16 xl:w-16
                   rounded-xl
-                  text-zinc-700
+                  
                   transition-all duration-200
-                  hover:bg-zinc-100 hover:text-zinc-900
+                  hover:bg-zinc-100 hover:text-white
                 "
               >
                 <span className="text-base sm:text-lg lg:text-xl xl:text-2xl">

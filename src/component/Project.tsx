@@ -36,7 +36,7 @@ function Project() {
         Projects
       </h1>
 
-      <p className="mt-4 max-w-3xl text-sm sm:text-base italic text-zinc-600">
+      <p className="mt-4 max-w-4xl  text-sm sm:text-2xl italic text-white">
         A selection of projects demonstrating my full-stack development
         experience. More projects are available on{" "}
         <a
