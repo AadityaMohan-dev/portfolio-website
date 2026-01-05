@@ -16,10 +16,10 @@ function About() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
-      className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
+      className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 border bg-zinc-50 rounded-2xl"
     >
       {/* Heading */}
-      <motion.h1 className="text-2xl sm:text-3xl text-zinc-900 lg:text-4xl font-bold tracking-tight">
+      <motion.h1 className="text-2xl sm:text-3xl text-zinc-900 lg:text-5xl font-bold tracking-tight">
         About Me
       </motion.h1>
 
@@ -30,7 +30,7 @@ function About() {
             Hi, I’m Aaditya Mohan.
           </h2>
 
-          <div className="flex items-center gap-2 text-sm sm:text-base text-zinc-600">
+          <div className="flex items-center font-semibold gap-2 text-sm sm:text-lg text-zinc-600">
             <span>📍</span>
             <span>Greater Noida, India</span>
           </div>
@@ -83,7 +83,7 @@ function About() {
         ].map((card, i) => (
           <div
             key={i}
-            className="rounded-xl  bg-zinc-100 p-4 sm:p-5 transition"
+            className="rounded-xl  bg-zinc-50 border border-zinc-400 p-4 sm:p-5 transition"
           >
             <h3 className="mb-2 text-sm sm:text-base font-semibold text-zinc-900">
               {card.title}

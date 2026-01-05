@@ -55,7 +55,7 @@ function Dashboard() {
       <SlideSection z={5}>
         <section
           className={`w-full ${
-            isMobile || isLowHeightLaptop ? "min-h-fit" : "h-[81vh]"
+            isMobile || isLowHeightLaptop ? "min-h-fit" : "h-[90vh]"
           }`}
         >
           <Home />
@@ -65,19 +65,19 @@ function Dashboard() {
       {/* CONTENT */}
       <div className={`relative mx-auto ${maxWidth} ${horizontalPadding}`}>
         <SlideSection z={10}>
-          <div className={`${sectionWrapper} bg-white ${sectionSpacing}`}>
+          <div className={`${sectionWrapper}    bg-zinc-100 ${sectionSpacing}`}>
             <About />
           </div>
         </SlideSection>
 
         <SlideSection z={20}>
-          <div className={`${sectionWrapper} bg-[#F78154] text-white ${sectionSpacing}`}>
+          <div className={`${sectionWrapper}   bg-[#F78154] text-white ${sectionSpacing}`}>
             <Project />
           </div>
         </SlideSection>
 
         <SlideSection z={30}>
-          <div className={`${sectionWrapper} bg-zinc-900 text-white ${sectionSpacing}`}>
+          <div className={`${sectionWrapper}   bg-zinc-900 text-white ${sectionSpacing}`}>
             <Contact />
           </div>
         </SlideSection>
