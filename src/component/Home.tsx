@@ -79,10 +79,10 @@ function Home() {
     >
       {/* MOBILE: name ABOVE character */}
       {isMobile && (
-        <div className="relative z-20 pt-10 flex justify-center">
+        <div className="relative z-20 pt-22 flex justify-center">
           <NameBlock />
         </div>
-      )}
+      )}  
 
       {/* DESKTOP: name in BACKGROUND */}
       {!isMobile && (

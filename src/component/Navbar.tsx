@@ -34,14 +34,11 @@ const Navbar: React.FC = () => {
       <ul
         className="
           flex items-center
-
-          gap-1 sm:gap-2 lg:gap-3
-          p-1.5 sm:p-2 lg:p-3
-
+          gap-2 sm:gap-3 lg:gap-4
+          p-2 sm:p-3 lg:p-4
           rounded-xl sm:rounded-2xl
           border border-zinc-200
-          bg-white/90
-          backdrop-blur-xl
+          bg-white
           shadow-lg
         "
       >
@@ -57,7 +54,7 @@ const Navbar: React.FC = () => {
                   transition={{ duration: 0.35, ease: "easeInOut" }}
                   className="
                     absolute inset-0
-                    rounded-lg sm:rounded-xl
+                    rounded-xl
                     border-2 border-zinc-900
                   "
                 />
@@ -69,25 +66,14 @@ const Navbar: React.FC = () => {
                 className="
                   relative z-10
                   flex items-center justify-center
-
-                  h-10 w-10
-                  sm:h-12 sm:w-12
-                  lg:h-14 lg:w-14
-                  xl:h-16 xl:w-16
-
-                  rounded-lg sm:rounded-xl
+                  h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 xl:h-16 xl:w-16
+                  rounded-xl
                   text-zinc-700
                   transition-all duration-200
-                  hover:bg-white hover:text-zinc-900
+                  hover:bg-zinc-100 hover:text-zinc-900
                 "
               >
-                {/* Icon scales with screen */}
-                <span className="
-                  text-base
-                  sm:text-lg
-                  lg:text-xl
-                  xl:text-2xl
-                ">
+                <span className="text-base sm:text-lg lg:text-xl xl:text-2xl">
                   {item.icon}
                 </span>
               </button>
