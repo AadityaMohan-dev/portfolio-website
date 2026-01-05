@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import useScreenSize from "../hooks/useScreenSize"; // your hook
+import useScreenSize from "../hooks/useScreenSize";
 
 interface SlideSectionProps {
   children: ReactNode;
@@ -8,20 +8,20 @@ interface SlideSectionProps {
 }
 
 const SlideSection: React.FC<SlideSectionProps> = ({ children, z }) => {
-  const { isMobile } = useScreenSize();
+  const { isMobile, isLowHeightLaptop } = useScreenSize();
+
+  const disableSlide = isMobile || isLowHeightLaptop;
 
   return (
     <motion.section
-      initial={{ y: 120, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
+      initial={disableSlide ? false : { y: 120, opacity: 0 }}
+      whileInView={disableSlide ? undefined : { y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
-      className={isMobile ? "" : "sticky top-24"} // disable sticky on mobile
-      style={{ zIndex: z }}
+      className={disableSlide ? "relative" : "sticky top-24"}
+      style={{ zIndex: disableSlide ? "auto" : z }}
     >
-      <div>
-        {children}
-      </div>
+      {children}
     </motion.section>
   );
 };

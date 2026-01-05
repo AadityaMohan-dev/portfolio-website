@@ -8,9 +8,13 @@ import bg from "../assets/HomeBackground.svg";
 import useScreenSize from "../hooks/useScreenSize";
 
 function Dashboard() {
-  const { isMobile, isDesktop, isWide } = useScreenSize();
+  const {
+    isMobile,
+    isDesktop,
+    isWide,
+    isLowHeightLaptop,
+  } = useScreenSize();
 
-  // Max width for different screens
   const maxWidth = isMobile
     ? "w-full"
     : isWide
@@ -19,26 +23,21 @@ function Dashboard() {
     ? "max-w-[1400px]"
     : "max-w-[1200px]";
 
-  // Horizontal padding for different screens
   const horizontalPadding = isMobile
-    ? "px-4" // small padding on mobile
+    ? "px-4"
     : isWide
     ? "px-16"
     : isDesktop
     ? "px-12"
     : "px-6";
 
-  // Vertical spacing for sections
-  const sectionSpacing = isWide
-    ? "py-20"
-    : isDesktop
-    ? "py-16"
-    : "py-12";
+  const sectionSpacing =
+    isLowHeightLaptop || isMobile ? "py-10" : isWide ? "py-20" : "py-16";
 
-  // Section wrapper styling
-  const sectionWrapper = isMobile
-    ? "w-full rounded-none border-0" // remove rounded and border on mobile
-    : "w-full rounded-xl border";
+  const sectionWrapper =
+    isMobile || isLowHeightLaptop
+      ? "w-full rounded-none border-0"
+      : "w-full rounded-xl border";
 
   return (
     <div
@@ -50,33 +49,33 @@ function Dashboard() {
         backgroundPosition: "center",
       }}
     >
-      {/* NAVBAR */}
       <Navbar />
 
       {/* HOME */}
       <SlideSection z={5}>
-        <section className={`${isMobile ? "min-h-[60vh]" : "h-[81vh]"} w-full`}>
+        <section
+          className={`w-full ${
+            isMobile || isLowHeightLaptop ? "min-h-fit" : "h-[81vh]"
+          }`}
+        >
           <Home />
         </section>
       </SlideSection>
 
       {/* CONTENT */}
       <div className={`relative mx-auto ${maxWidth} ${horizontalPadding}`}>
-        {/* ABOUT */}
         <SlideSection z={10}>
-          <div className={`${sectionWrapper} bg-white/90 ${sectionSpacing}`}>
+          <div className={`${sectionWrapper} bg-white ${sectionSpacing}`}>
             <About />
           </div>
         </SlideSection>
 
-        {/* PROJECTS */}
         <SlideSection z={20}>
           <div className={`${sectionWrapper} bg-[#F78154] text-white ${sectionSpacing}`}>
             <Project />
           </div>
         </SlideSection>
 
-        {/* CONTACT */}
         <SlideSection z={30}>
           <div className={`${sectionWrapper} bg-zinc-900 text-white ${sectionSpacing}`}>
             <Contact />
@@ -86,5 +85,6 @@ function Dashboard() {
     </div>
   );
 }
+
 
 export default Dashboard;

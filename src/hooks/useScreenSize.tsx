@@ -1,20 +1,32 @@
+// useScreenSize.ts
 import { useEffect, useState } from "react";
 
-function useScreenSize() {
-  const [width, setWidth] = useState(window.innerWidth);
+export default function useScreenSize() {
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const onResize = () =>
+      setSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  const isMobile = size.width < 768;
+  const isDesktop = size.width >= 1024;
+  const isWide = size.width >= 1536;
+
+  // 🔥 CRITICAL: detect 15-inch laptops
+  const isLowHeightLaptop =
+    size.width >= 1024 && size.width <= 1536 && size.height <= 850;
+
   return {
-    isMobile: width < 640,
-    isLaptop: width >= 1280 && width < 1600,      // 13–15 inch
-    isDesktop: width >= 1600 && width < 1920,     // standard desktop
-    isWide: width >= 1920,                        // ultrawide
+    ...size,
+    isMobile,
+    isDesktop,
+    isWide,
+    isLowHeightLaptop,
   };
 }
-
-export default useScreenSize;
