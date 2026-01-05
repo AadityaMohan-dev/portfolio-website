@@ -15,26 +15,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  {
-    label: "Resume",
-    link: resume,
-    icon: <FaFilePdf size={30} />,
-  },
-  {
-    label: "GitHub",
-    link: "https://github.com/AadityaMohan-dev?tab=repositories",
-    icon: <FaGithub size={30} />,
-  },
-  {
-    label: "LinkedIn",
-    link: "https://www.linkedin.com/in/aaditya-mohan/",
-    icon: <FaLinkedin size={30} />,
-  },
-  {
-    label: "Instagram",
-    link: "https://www.instagram.com/aaditya._.mohan",
-    icon: <FaInstagram size={30} />,
-  },
+  { label: "Resume", link: resume, icon: <FaFilePdf /> },
+  { label: "GitHub", link: "https://github.com/AadityaMohan-dev", icon: <FaGithub /> },
+  { label: "LinkedIn", link: "https://www.linkedin.com/in/aaditya-mohan/", icon: <FaLinkedin /> },
+  { label: "Instagram", link: "https://www.instagram.com/aaditya._.mohan", icon: <FaInstagram /> },
 ];
 
 const Navbar: React.FC = () => {
@@ -46,33 +30,83 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center">
-      <ul className="flex gap-2 rounded-2xl border border-zinc-200 bg-white/70 p-2 backdrop-blur-md shadow-lg">
+    <nav className="fixed inset-x-0 top-3 sm:top-5 lg:top-7 z-[100] flex justify-center">
+      <ul
+        className="
+          flex items-center
+
+          gap-1 sm:gap-2 lg:gap-3
+          p-1.5 sm:p-2 lg:p-3
+
+          rounded-xl sm:rounded-2xl
+          border border-zinc-200
+          bg-white/90
+          backdrop-blur-xl
+          shadow-lg
+        "
+      >
         {navItems.map((item) => {
           const isActive = active === item.label;
 
           return (
             <li key={item.label} className="relative group">
-              {/* Active animated pill */}
+              {/* Active indicator */}
               {isActive && (
                 <motion.div
                   layoutId="active-pill"
                   transition={{ duration: 0.35, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-xl border-2 border-zinc-900 pointer-events-none"
+                  className="
+                    absolute inset-0
+                    rounded-lg sm:rounded-xl
+                    border-2 border-zinc-900
+                  "
                 />
               )}
 
-              {/* Icon Button */}
               <button
                 onClick={() => handleClick(item)}
-                className="relative z-10 flex  items-center justify-center rounded-xl text-zinc-700 transition-all duration-200 hover:bg-white hover:text-zinc-900 focus:outline-none"
                 aria-label={item.label}
+                className="
+                  relative z-10
+                  flex items-center justify-center
+
+                  h-10 w-10
+                  sm:h-12 sm:w-12
+                  lg:h-14 lg:w-14
+                  xl:h-16 xl:w-16
+
+                  rounded-lg sm:rounded-xl
+                  text-zinc-700
+                  transition-all duration-200
+                  hover:bg-white hover:text-zinc-900
+                "
               >
-                {item.icon}
+                {/* Icon scales with screen */}
+                <span className="
+                  text-base
+                  sm:text-lg
+                  lg:text-xl
+                  xl:text-2xl
+                ">
+                  {item.icon}
+                </span>
               </button>
 
-              {/* Tooltip */}
-              <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 scale-90 whitespace-nowrap rounded-md bg-zinc-900 px-2 py-1 text-xs text-white opacity-0 transition-all duration-200 group-hover:scale-100 group-hover:opacity-100">
+              {/* Tooltip (desktop+) */}
+              <span
+                className="
+                  pointer-events-none
+                  absolute -bottom-8 left-1/2 -translate-x-1/2
+                  hidden md:block
+                  whitespace-nowrap
+                  rounded-md
+                  bg-zinc-900 px-2 py-1
+                  text-xs text-white
+                  opacity-0
+                  transition
+                  group-hover:opacity-100
+                "
+              >
                 {item.label}
               </span>
             </li>

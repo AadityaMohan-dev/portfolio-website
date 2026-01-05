@@ -5,8 +5,37 @@ import SlideSection from "./SlideSection";
 import Contact from "./Contact";
 import Navbar from "./Navbar";
 import bg from "../assets/HomeBackground.svg";
+import useScreenSize from "../hooks/useScreenSize";
 
 function Dashboard() {
+  const { isMobile, isLaptop, isDesktop, isWide } = useScreenSize();
+
+  const maxWidth = isMobile
+    ? ""
+    : isWide
+    ? "max-w-[1600px]"
+    : isDesktop
+    ? "max-w-[1400px]"
+    : "max-w-[1200px]";
+
+  const horizontalPadding = isMobile
+    ? "px-0"
+    : isWide
+    ? "px-16"
+    : isDesktop
+    ? "px-12"
+    : "px-6";
+
+  const sectionSpacing = isWide
+    ? "py-20"
+    : isDesktop
+    ? "py-16"
+    : "py-12";
+
+  const sectionWrapper = isMobile
+    ? "w-full"
+    : "rounded-xl border";
+
   return (
     <div
       className="relative min-h-[300vh] bg-gray-50"
@@ -17,33 +46,37 @@ function Dashboard() {
         backgroundPosition: "center",
       }}
     >
-      {/* FIXED NAVBAR (DO NOT WRAP IN EXTRA DIVS) */}
+      {/* NAVBAR */}
       <Navbar />
 
-      {/* HOME (BASE LAYER) */}
+      {/* HOME */}
       <SlideSection z={5}>
-        <Home />
+        <section className="h-[81vh] w-full">
+    <Home />
+  </section>
       </SlideSection>
 
-      {/* SLIDING CONTENT */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* CONTENT */}
+      <div
+        className={`relative ${isMobile ? "" : "mx-auto"} ${maxWidth} ${horizontalPadding}`}
+      >
         {/* ABOUT */}
         <SlideSection z={10}>
-          <div className="rounded-xl border bg-white/90 px-4 py-6 sm:px-6 lg:px-8">
+          <div className={`${sectionWrapper} bg-white/90 ${sectionSpacing}`}>
             <About />
           </div>
         </SlideSection>
 
         {/* PROJECTS */}
         <SlideSection z={20}>
-          <div className="rounded-xl border bg-[#F78154] px-4 py-8 text-white sm:px-6 lg:px-10">
+          <div className={`${sectionWrapper} bg-[#F78154] text-white ${sectionSpacing}`}>
             <Project />
           </div>
         </SlideSection>
 
         {/* CONTACT */}
         <SlideSection z={30}>
-          <div className="rounded-xl border bg-zinc-900 px-4 py-10 text-white sm:px-6 lg:px-10">
+          <div className={`${sectionWrapper} bg-zinc-900 text-white ${sectionSpacing}`}>
             <Contact />
           </div>
         </SlideSection>
