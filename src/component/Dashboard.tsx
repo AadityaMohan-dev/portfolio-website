@@ -8,7 +8,7 @@ import bg from "../assets/HomeBackground.svg";
 import useScreenSize from "../hooks/useScreenSize";
 
 function Dashboard() {
-  const { isMobile, isLaptop, isDesktop, isWide } = useScreenSize();
+  const { isMobile, isDesktop, isWide } = useScreenSize();
 
   const maxWidth = isMobile
     ? ""
