@@ -1,6 +1,12 @@
 function Project() {
   const project_data = [
     {
+      name: "FinanceFlow",
+      desc: "A web app to manage group expenses, balances, and settlements.",
+      tech: "NextJs, Prisma, PostgreSQL, Clerk",
+      link: "https://finance-flow-olive.vercel.app/",
+    },
+    {
       name: "Auth App",
       desc: "An authentication application to manage authentication for SaaS platforms.",
       tech: "Java, Spring Boot, MySQL, JPA, REST APIs",
@@ -18,12 +24,7 @@ function Project() {
       tech: "Next.js, Tailwind CSS, Prisma, PostgreSQL, Clerk",
       link: "https://github.com/AadityaMohan-dev/ByteBlog",
     },
-    {
-      name: "Expense Manager",
-      desc: "A web app to manage group expenses, balances, and settlements.",
-      tech: "React, Tailwind CSS",
-      link: "https://expense-tracker-mu-sandy.vercel.app/",
-    },
+    
   ];
 
   return (
