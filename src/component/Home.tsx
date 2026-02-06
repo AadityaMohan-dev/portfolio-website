@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Sparkles, Code2, Rocket } from "lucide-react";
 import character from "../assets/HomeCharacter.png";
 import useIsMobile from "../hooks/useIsMobile";
-
+import type { Variants } from "framer-motion";
 function Home() {
   const isMobile = useIsMobile();
 
@@ -68,18 +68,18 @@ function Home() {
   );
 
   // Floating icons animation
-  const floatingVariants = {
-    animate: {
-      y: [0, -20, 0],
-      rotate: [0, 5, -5, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
+  
+const floatingVariants: Variants = {
+  float: {
+    y: [0, -20, 0],
+    rotate: [0, 5, -5, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: [0.42, 0, 0.58, 1], // easeInOut cubic-bezier
     },
-  };
-
+  },
+};
   return (
     <section
       className="
@@ -97,7 +97,7 @@ function Home() {
         <>
           <motion.div
             variants={floatingVariants}
-            animate="animate"
+            animate="float"
             className="absolute top-[15%] left-[10%] z-5 opacity-20"
           >
             <Code2 className="w-16 h-16 text-zinc-700" />
@@ -105,7 +105,7 @@ function Home() {
           
           <motion.div
             variants={floatingVariants}
-            animate="animate"
+            animate="float"
             transition={{ delay: 0.5 }}
             className="absolute top-[25%] right-[12%] z-5 opacity-20"
           >
@@ -114,7 +114,7 @@ function Home() {
           
           <motion.div
             variants={floatingVariants}
-            animate="animate"
+            animate="float"
             transition={{ delay: 1 }}
             className="absolute bottom-[30%] left-[15%] z-5 opacity-20"
           >
