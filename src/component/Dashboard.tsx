@@ -1,3 +1,6 @@
+import { motion, useScroll, useSpring } from "framer-motion";
+import { ArrowUp } from "lucide-react";
+import { useState, useEffect } from "react";
 import About from "./About";
 import Home from "./Home";
 import Project from "./Project";
@@ -8,12 +11,30 @@ import bg from "../assets/HomeBackground.svg";
 import useScreenSize from "../hooks/useScreenSize";
 
 function Dashboard() {
-  const {
-    isMobile,
-    isDesktop,
-    isWide,
-    isLowHeightLaptop,
-  } = useScreenSize();
+  const { isMobile, isDesktop, isWide, isLowHeightLaptop } = useScreenSize();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Scroll progress tracking
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  // Show scroll to top button after scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const maxWidth = isMobile
     ? "w-full"
@@ -37,7 +58,7 @@ function Dashboard() {
   const sectionWrapper =
     isMobile || isLowHeightLaptop
       ? "w-full rounded-none border-0"
-      : "w-full rounded-xl border";
+      : "w-full rounded-xl border-2";
 
   return (
     <div
@@ -50,6 +71,12 @@ function Dashboard() {
       }}
     >
       <Navbar />
+
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#F78154] to-zinc-900 origin-left z-[101]"
+        style={{ scaleX }}
+      />
 
       {/* HOME */}
       <SlideSection z={5}>
@@ -65,26 +92,77 @@ function Dashboard() {
       {/* CONTENT */}
       <div className={`relative mx-auto ${maxWidth} ${horizontalPadding}`}>
         <SlideSection z={10}>
-          <div className={`${sectionWrapper}    bg-zinc-100 ${sectionSpacing}`}>
+          <div
+            className={`${sectionWrapper} bg-zinc-100 ${sectionSpacing} shadow-lg transition-shadow duration-300`}
+          >
             <About />
           </div>
         </SlideSection>
 
         <SlideSection z={20}>
-          <div className={`${sectionWrapper}   bg-[#F78154] text-white ${sectionSpacing}`}>
+          <div
+            className={`${sectionWrapper} bg-[#F78154] text-white ${sectionSpacing} shadow-lg transition-shadow duration-300`}
+          >
             <Project />
           </div>
         </SlideSection>
 
         <SlideSection z={30}>
-          <div className={`${sectionWrapper}   bg-zinc-900 text-white ${sectionSpacing}`}>
+          <div
+            className={`${sectionWrapper} bg-zinc-900 text-white ${sectionSpacing} shadow-lg transition-shadow duration-300`}
+          >
             <Contact />
           </div>
         </SlideSection>
+
+        {/* Footer */}
+        <motion.footer
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="py-8 text-center"
+        >
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-px w-32 bg-gradient-to-r from-transparent via-zinc-400 to-transparent" />
+            <p className="text-sm text-zinc-600">
+              Built with <span className="text-red-500">♥</span> by Aaditya Mohan
+            </p>
+            <p className="text-xs text-zinc-500">
+              © {new Date().getFullYear()} All rights reserved
+            </p>
+          </div>
+        </motion.footer>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          className="
+            fixed bottom-8 right-8 z-50
+            flex items-center justify-center
+            w-12 h-12 sm:w-14 sm:h-14
+            rounded-full
+            bg-zinc-900
+            text-white
+            shadow-lg
+            hover:shadow-xl
+            hover:scale-110
+            active:scale-95
+            transition-all
+            duration-200
+            border-2 border-white/10
+          "
+        >
+          <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6" />
+        </motion.button>
+      )}
     </div>
   );
 }
-
 
 export default Dashboard;

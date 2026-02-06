@@ -1,11 +1,6 @@
 import { useState, type JSX } from "react";
 import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaInstagram,
-  FaFilePdf,
-} from "react-icons/fa";
+import { Github, Linkedin, Instagram, FileText } from "lucide-react";
 import resume from "../assets/resume.pdf";
 
 type NavItem = {
@@ -15,10 +10,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "Resume", link: resume, icon: <FaFilePdf /> },
-  { label: "GitHub", link: "https://github.com/AadityaMohan-dev", icon: <FaGithub /> },
-  { label: "LinkedIn", link: "https://www.linkedin.com/in/aaditya-mohan/", icon: <FaLinkedin /> },
-  { label: "Instagram", link: "https://www.instagram.com/aaditya._.mohan", icon: <FaInstagram /> },
+  { label: "Resume", link: resume, icon: <FileText /> },
+  { label: "GitHub", link: "https://github.com/AadityaMohan-dev", icon: <Github /> },
+  { label: "LinkedIn", link: "https://www.linkedin.com/in/aaditya-mohan/", icon: <Linkedin /> },
+  { label: "Instagram", link: "https://www.instagram.com/aaditya._.mohan", icon: <Instagram /> },
 ];
 
 const Navbar: React.FC = () => {
@@ -31,22 +26,35 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed inset-x-0 top-3 sm:top-5 lg:top-7 z-[100] flex justify-center">
-      <ul
+      <motion.ul
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="
           flex items-center
           gap-2 sm:gap-3 lg:gap-4
           p-2 sm:p-3 lg:p-4
           rounded-xl sm:rounded-2xl
-          border border-zinc-200
-          bg-white
+          border-2 border-zinc-200
+          bg-white/95
+          backdrop-blur-sm
           shadow-lg
+          hover:shadow-xl
+          transition-shadow
+          duration-300
         "
       >
-        {navItems.map((item) => {
+        {navItems.map((item, index) => {
           const isActive = active === item.label;
 
           return (
-            <li key={item.label} className="relative group">
+            <motion.li 
+              key={item.label} 
+              className="relative group"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
+            >
               {/* Active indicator */}
               {isActive && (
                 <motion.div
@@ -55,7 +63,7 @@ const Navbar: React.FC = () => {
                   className="
                     absolute inset-0
                     rounded-xl
-                    border-2 border-zinc-900
+                    bg-zinc-900
                   "
                 />
               )}
@@ -63,17 +71,19 @@ const Navbar: React.FC = () => {
               <button
                 onClick={() => handleClick(item)}
                 aria-label={item.label}
-                className="
+                className={`
                   relative z-10
                   flex items-center justify-center
                   h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 xl:h-16 xl:w-16
                   rounded-xl
-                  
                   transition-all duration-200
-                  hover:bg-zinc-100 hover:text-white
-                "
+                  ${isActive 
+                    ? 'text-white' 
+                    : 'text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900'
+                  }
+                `}
               >
-                <span className="text-base sm:text-lg lg:text-xl xl:text-2xl">
+                <span className="text-base sm:text-lg lg:text-xl xl:text-2xl transition-transform group-hover:scale-110">
                   {item.icon}
                 </span>
               </button>
@@ -82,23 +92,27 @@ const Navbar: React.FC = () => {
               <span
                 className="
                   pointer-events-none
-                  absolute -bottom-8 left-1/2 -translate-x-1/2
+                  absolute -bottom-9 left-1/2 -translate-x-1/2
                   hidden md:block
                   whitespace-nowrap
-                  rounded-md
-                  bg-zinc-900 px-2 py-1
-                  text-xs text-white
+                  rounded-lg
+                  bg-zinc-900 px-3 py-1.5
+                  text-xs font-medium text-white
                   opacity-0
-                  transition
+                  transition-all duration-200
                   group-hover:opacity-100
+                  group-hover:-translate-y-1
+                  shadow-lg
                 "
               >
                 {item.label}
+                {/* Tooltip arrow */}
+                <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 rotate-45"></span>
               </span>
-            </li>
+            </motion.li>
           );
         })}
-      </ul>
+      </motion.ul>
     </nav>
   );
 };

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { Sparkles, Code2, Rocket } from "lucide-react";
 import character from "../assets/HomeCharacter.png";
-import useIsMobile from "../hooks/useIsMobile"
+import useIsMobile from "../hooks/useIsMobile";
+
 function Home() {
   const isMobile = useIsMobile();
 
@@ -10,7 +12,7 @@ function Home() {
   const NameBlock = () => (
     <div className="flex flex-col items-center justify-center pointer-events-none select-none">
       {/* AADITYA */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden relative">
         <motion.div className="flex">
           {name.map((letter, i) => (
             <motion.span
@@ -37,7 +39,7 @@ function Home() {
       </div>
 
       {/* MOHAN */}
-      <div className="overflow-hidden -mt-[6vw]">
+      <div className="overflow-hidden -mt-[6vw] relative">
         <motion.div className="flex">
           {lastName.map((letter, i) => (
             <motion.span
@@ -65,6 +67,19 @@ function Home() {
     </div>
   );
 
+  // Floating icons animation
+  const floatingVariants = {
+    animate: {
+      y: [0, -20, 0],
+      rotate: [0, 5, -5, 0],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <section
       className="
@@ -77,12 +92,43 @@ function Home() {
         lg:min-h-screen
       "
     >
+      {/* Decorative floating icons */}
+      {!isMobile && (
+        <>
+          <motion.div
+            variants={floatingVariants}
+            animate="animate"
+            className="absolute top-[15%] left-[10%] z-5 opacity-20"
+          >
+            <Code2 className="w-16 h-16 text-zinc-700" />
+          </motion.div>
+          
+          <motion.div
+            variants={floatingVariants}
+            animate="animate"
+            transition={{ delay: 0.5 }}
+            className="absolute top-[25%] right-[12%] z-5 opacity-20"
+          >
+            <Sparkles className="w-20 h-20 text-zinc-400" />
+          </motion.div>
+          
+          <motion.div
+            variants={floatingVariants}
+            animate="animate"
+            transition={{ delay: 1 }}
+            className="absolute bottom-[30%] left-[15%] z-5 opacity-20"
+          >
+            <Rocket className="w-14 h-14 text-zinc-600" />
+          </motion.div>
+        </>
+      )}
+
       {/* MOBILE: name ABOVE character */}
       {isMobile && (
         <div className="relative z-20 pt-22 flex justify-center">
           <NameBlock />
         </div>
-      )}  
+      )}
 
       {/* DESKTOP: name in BACKGROUND */}
       {!isMobile && (
@@ -98,9 +144,11 @@ function Home() {
         transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
         className="absolute inset-0 z-10 flex items-end justify-center"
       >
-        <img
+        <motion.img
           src={character}
           alt="Developer"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.3 }}
           className="
             object-contain
             object-bottom
@@ -109,8 +157,34 @@ function Home() {
             md:h-[75vh]
             lg:h-[85vh]
             max-w-[90vw]
+            drop-shadow-2xl
           "
         />
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 hidden md:block"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
+        >
+          <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
+            Scroll Down
+          </span>
+          <div className="w-6 h-10 border-2 border-zinc-400 rounded-full flex items-start justify-center p-2">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1.5 h-1.5 bg-zinc-500 rounded-full"
+            />
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );

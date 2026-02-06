@@ -1,3 +1,5 @@
+import { ExternalLink, Github, Code2 } from 'lucide-react';
+
 function Project() {
   const project_data = [
     {
@@ -24,7 +26,6 @@ function Project() {
       tech: "Next.js, Tailwind CSS, Prisma, PostgreSQL, Clerk",
       link: "https://github.com/AadityaMohan-dev/ByteBlog",
     },
-    
   ];
 
   return (
@@ -37,54 +38,85 @@ function Project() {
         Projects
       </h1>
 
-      <p className="mt-4 max-w-4xl  text-sm sm:text-2xl italic text-white">
+      <p className="mt-4 max-w-4xl text-sm sm:text-2xl italic text-white">
         A selection of projects demonstrating my full-stack development
         experience. More projects are available on{" "}
         <a
           href="https://github.com/AadityaMohan-dev?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline underline-offset-4 hover:text-zinc-900"
+          className="inline-flex items-center gap-1 underline underline-offset-4 hover:text-zinc-900"
         >
           GitHub
+          <Github className="w-5 h-5" />
         </a>
         .
       </p>
 
       {/* Projects Grid */}
-      <div className="mt-10 bg-[#f6936b]  p-10 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="mt-10 bg-[#f6936b] p-10 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-6">
         {project_data.map((project, index) => (
           <div
             key={index}
             className="
-              border
+              group
+              relative
+              overflow-hidden
               rounded-xl
               bg-white
               text-black
               p-6
-              transition
-              hover:-translate-y-1
-              hover:border-zinc-400
+              shadow-lg
+              transition-all
+              duration-300
+              hover:shadow-2xl
+              hover:-translate-y-2
+              border-2
+              border-transparent
+              hover:border-zinc-300
             "
           >
-            <h3 className="text-lg font-semibold">{project.name}</h3>
+            {/* Decorative corner accent */}
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#f6936b] opacity-10 rounded-bl-full transition-all duration-300 group-hover:w-32 group-hover:h-32"></div>
+            
+            <div className="relative z-10">
+              <div className="flex items-start justify-between">
+                <h3 className="text-lg font-bold tracking-tight">{project.name}</h3>
+                <Code2 className="w-5 h-5 text-[#f6936b] opacity-60" />
+              </div>
 
-            <p className="mt-3 text-sm text-zinc-700 leading-relaxed">
-              {project.desc}
-            </p>
+              <p className="mt-3 text-sm text-zinc-700 leading-relaxed line-clamp-3">
+                {project.desc}
+              </p>
 
-            <p className="mt-3 text-xs text-zinc-600">
-              <span className="font-semibold">Tech:</span> {project.tech}
-            </p>
+              <div className="mt-4 pt-3 border-t border-zinc-200">
+                <p className="text-xs text-zinc-600">
+                  <span className="font-semibold text-black">Tech Stack:</span>{" "}
+                  {project.tech}
+                </p>
+              </div>
 
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block text-sm font-semibold underline underline-offset-4 hover:text-zinc-900"
-            >
-              View Project →
-            </a>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  mt-4 
+                  inline-flex 
+                  items-center 
+                  gap-2 
+                  text-sm 
+                  font-semibold 
+                  text-[#f6936b]
+                  hover:gap-3
+                  transition-all
+                  duration-200
+                "
+              >
+                View Project 
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         ))}
       </div>
