@@ -36,29 +36,89 @@ function Dashboard() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const maxWidth = isMobile
-    ? "w-full"
-    : isWide
+  // Remove all animations and complex styling for mobile
+  if (isMobile) {
+    return (
+      <div
+        className="relative min-h-screen bg-gray-50"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <Navbar />
+
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#F78154] to-zinc-900 origin-left z-[101]"
+          style={{ scaleX }}
+        />
+
+        {/* HOME - Full Screen */}
+        <section className="min-h-screen flex items-center justify-center px-4">
+          <Home />
+        </section>
+
+        {/* ABOUT - Full Screen */}
+        <section className="min-h-screen bg-zinc-100 flex items-center">
+          <div className="w-full px-4 py-16">
+            <About />
+          </div>
+        </section>
+
+        {/* PROJECT - Full Screen */}
+        <section className="min-h-screen bg-[#F78154] text-white flex items-center">
+          <div className="w-full px-4 py-16">
+            <Project />
+          </div>
+        </section>
+
+        {/* CONTACT - Full Screen */}
+        <section className="min-h-screen bg-zinc-900 text-white flex items-center">
+          <div className="w-full px-4 py-16">
+            <Contact />
+          </div>
+        </section>
+
+
+        {/* Scroll to Top Button */}
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            className="fixed bottom-8 right-8 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 text-white shadow-lg"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  // Desktop version remains the same
+  const maxWidth = isWide
     ? "max-w-[1600px]"
     : isDesktop
     ? "max-w-[1400px]"
     : "max-w-[1200px]";
 
-  const horizontalPadding = isMobile
-    ? "px-4"
-    : isWide
+  const horizontalPadding = isWide
     ? "px-16"
     : isDesktop
     ? "px-12"
     : "px-6";
 
-  const sectionSpacing =
-    isLowHeightLaptop || isMobile ? "py-10" : isWide ? "py-20" : "py-16";
+  const sectionSpacing = isLowHeightLaptop 
+    ? "py-10" 
+    : isWide 
+    ? "py-20" 
+    : "py-16";
 
-  const sectionWrapper =
-    isMobile || isLowHeightLaptop
-      ? "w-full rounded-none border-0"
-      : "w-full rounded-xl border-2";
+  const sectionWrapper = isLowHeightLaptop
+    ? "w-full rounded-none border-0"
+    : "w-full rounded-xl border-2";
 
   return (
     <div
@@ -82,7 +142,7 @@ function Dashboard() {
       <SlideSection z={5}>
         <section
           className={`w-full ${
-            isMobile || isLowHeightLaptop ? "min-h-fit" : "h-[90vh]"
+            isLowHeightLaptop ? "min-h-fit" : "h-[90vh]"
           }`}
         >
           <Home />
@@ -114,24 +174,6 @@ function Dashboard() {
             <Contact />
           </div>
         </SlideSection>
-
-        {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="py-8 text-center"
-        >
-          <div className="flex flex-col items-center gap-3">
-            <div className="h-px w-32 bg-gradient-to-r from-transparent via-zinc-400 to-transparent" />
-            <p className="text-sm text-zinc-600">
-              Built with <span className="text-red-500">♥</span> by Aaditya Mohan
-            </p>
-            <p className="text-xs text-zinc-500">
-              © {new Date().getFullYear()} All rights reserved
-            </p>
-          </div>
-        </motion.footer>
       </div>
 
       {/* Scroll to Top Button */}
