@@ -4,7 +4,7 @@ function Project() {
   const project_data = [
     {
       name: "FinanceFlow",
-      desc: "A web app to manage group expenses, balances, and settlements.",
+      desc: "A web app to manage expenses, track budgets, and visualize financial data with interactive charts.",
       tech: "NextJs, Prisma, PostgreSQL, Clerk",
       link: "https://finance-flow-olive.vercel.app/",
     },
