@@ -8,18 +8,24 @@ interface SlideSectionProps {
 }
 
 const SlideSection: React.FC<SlideSectionProps> = ({ children, z }) => {
-  const { isMobile, isLowHeightLaptop } = useScreenSize();
+  const { isMobile } = useScreenSize();
 
-  const disableSlide = isMobile || isLowHeightLaptop;
+  if (isMobile) {
+    return (
+      <section className="relative">
+        {children}
+      </section>
+    );
+  }
 
   return (
     <motion.section
-      initial={disableSlide ? false : { y: 120, opacity: 0 }}
-      whileInView={disableSlide ? undefined : { y: 0, opacity: 1 }}
+      initial={{ y: 120, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
-      className={disableSlide ? "relative" : "sticky top-24"}
-      style={{ zIndex: disableSlide ? "auto" : z }}
+      viewport={{ once: true, amount: 0.05 }}
+      className="sticky top-10"
+      style={{ zIndex: z }}
     >
       {children}
     </motion.section>

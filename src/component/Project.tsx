@@ -1,6 +1,27 @@
-import { ExternalLink, Github, Code2 } from 'lucide-react';
+import { motion } from "framer-motion";
+import { ExternalLink, Github, Code2 } from "lucide-react";
+import useScreenSize from "../hooks/useScreenSize";
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.33, 1, 0.68, 1] },
+  },
+};
 
 function Project() {
+  const { isMobile } = useScreenSize();
+
   const project_data = [
     {
       name: "FinanceFlow",
@@ -29,35 +50,51 @@ function Project() {
   ];
 
   return (
-    <section
+    <motion.section
       id="projects"
-      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.05 }}
+      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12"
     >
       {/* Heading */}
-      <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+      <motion.h1
+        variants={item}
+        className="text-2xl sm:text-3xl font-bold tracking-tight"
+      >
         Projects
-      </h1>
+      </motion.h1>
 
-      <p className="mt-4 max-w-4xl text-sm sm:text-2xl italic text-white">
+      <motion.p
+        variants={item}
+        className="mt-4 max-w-4xl text-sm sm:text-2xl italic text-white"
+      >
         A selection of projects demonstrating my full-stack development
         experience. More projects are available on{" "}
         <a
           href="https://github.com/AadityaMohan-dev?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 underline underline-offset-4 hover:text-zinc-900"
+          className="inline-flex items-center gap-1 underline underline-offset-4 hover:text-zinc-900 transition-colors"
         >
           GitHub
           <Github className="w-5 h-5" />
         </a>
         .
-      </p>
+      </motion.p>
 
       {/* Projects Grid */}
-      <div className="mt-10 bg-[#f6936b] p-10 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <motion.div
+        variants={item}
+        className="mt-8 bg-[#f6936b] p-4 sm:p-6 lg:p-10 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
+      >
         {project_data.map((project, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={item}
+            whileHover={isMobile ? {} : { y: -6, scale: 1.02 }}
+            transition={{ duration: 0.3 }}
             className="
               group
               relative
@@ -65,23 +102,24 @@ function Project() {
               rounded-xl
               bg-white
               text-black
-              p-6
+              p-5 sm:p-6
               shadow-lg
-              transition-all
-              duration-300
-              hover:shadow-2xl
-              hover:-translate-y-2
               border-2
               border-transparent
               hover:border-zinc-300
+              hover:shadow-2xl
+              transition-all
+              duration-300
             "
           >
-            {/* Decorative corner accent */}
-            <div className="absolute top-0 right-0 w-20 h-20 bg-[#f6936b] opacity-10 rounded-bl-full transition-all duration-300 group-hover:w-32 group-hover:h-32"></div>
-            
+            {/* Corner accent */}
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#f6936b] opacity-10 rounded-bl-full transition-all duration-300 group-hover:w-32 group-hover:h-32" />
+
             <div className="relative z-10">
               <div className="flex items-start justify-between">
-                <h3 className="text-lg font-bold tracking-tight">{project.name}</h3>
+                <h3 className="text-lg font-bold tracking-tight">
+                  {project.name}
+                </h3>
                 <Code2 className="w-5 h-5 text-[#f6936b] opacity-60" />
               </div>
 
@@ -101,26 +139,26 @@ function Project() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  mt-4 
-                  inline-flex 
-                  items-center 
-                  gap-2 
-                  text-sm 
-                  font-semibold 
+                  mt-4
+                  inline-flex
+                  items-center
+                  gap-2
+                  text-sm
+                  font-semibold
                   text-[#f6936b]
                   hover:gap-3
                   transition-all
                   duration-200
                 "
               >
-                View Project 
+                View Project
                 <ExternalLink className="w-4 h-4" />
               </a>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }
 

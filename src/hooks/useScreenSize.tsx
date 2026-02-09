@@ -1,32 +1,58 @@
-// useScreenSize.ts
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function useScreenSize() {
-  const [size, setSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+interface ScreenSize {
+  width: number;
+  height: number;
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+  isWide: boolean;
+  isLowHeightLaptop: boolean;
+}
+
+function useScreenSize(): ScreenSize {
+  const [screenSize, setScreenSize] = useState<ScreenSize>(() => {
+    const w = typeof window !== "undefined" ? window.innerWidth : 1024;
+    const h = typeof window !== "undefined" ? window.innerHeight : 768;
+    return {
+      width: w,
+      height: h,
+      isMobile: w < 640,
+      isTablet: w >= 640 && w < 1024,
+      isDesktop: w >= 1024 && w < 1536,
+      isWide: w >= 1536,
+      isLowHeightLaptop: h < 700 && w >= 1024,
+    };
   });
 
   useEffect(() => {
-    const onResize = () =>
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    let rafId: number;
+
+    const handleResize = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        setScreenSize({
+          width: w,
+          height: h,
+          isMobile: w < 640,
+          isTablet: w >= 640 && w < 1024,
+          isDesktop: w >= 1024 && w < 1536,
+          isWide: w >= 1536,
+          isLowHeightLaptop: h < 700 && w >= 1024,
+        });
+      });
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  const isMobile = size.width < 768;
-  const isDesktop = size.width >= 1024;
-  const isWide = size.width >= 1536;
-
-  // 🔥 CRITICAL: detect 15-inch laptops
-  const isLowHeightLaptop =
-    size.width >= 1024 && size.width <= 1536 && size.height <= 850;
-
-  return {
-    ...size,
-    isMobile,
-    isDesktop,
-    isWide,
-    isLowHeightLaptop,
-  };
+  return screenSize;
 }
+
+export default useScreenSize;
