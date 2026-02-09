@@ -11,7 +11,7 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 lg:pb-16"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 lg:pb-16"
     >
       {/* Heading */}
       <h1 className="pt-8 sm:pt-12 lg:pt-16 pb-2 sm:pb-3 lg:pb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
