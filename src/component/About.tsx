@@ -136,7 +136,7 @@ function About() {
       {/* Highlights - 2 columns on all screens */}
       <motion.div
         variants={itemVariant}
-        className="mt-6 sm:mt-8 lg:mt-10 grid grid-cols-2 gap-2 sm:gap-3  lg:gap-4"
+        className="mt-6 sm:mt-8 lg:mt-10 grid lg:grid-cols-2 gap-2 sm:gap-3  lg:gap-4"
       >
         {highlights.map((card, i) => (
           <motion.div
