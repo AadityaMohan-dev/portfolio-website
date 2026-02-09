@@ -97,10 +97,10 @@ function Dashboard() {
   const horizontalPadding = isWide ? "px-16" : isDesktop ? "px-12" : "px-6";
 
   const sectionSpacing = isLowHeightLaptop
-    ? "py-10"
+    ? "py-2"
     : isWide
-    ? "py-20"
-    : "py-16";
+    ? "py-2"
+    : "py-2";
 
   const sectionWrapper = isLowHeightLaptop
     ? "w-full rounded-none border-0"
@@ -137,7 +137,7 @@ function Dashboard() {
         {/* ABOUT */}
         <SlideSection z={10}>
           <div
-            className={`${sectionWrapper} bg-zinc-100 ${sectionSpacing} shadow-lg`}
+            className={`${sectionWrapper}  bg-zinc-100 ${sectionSpacing} shadow-lg`}
           >
             <About />
           </div>
